@@ -1,117 +1,122 @@
-## Advanced System Care
+# Advanced System Care
 
-This PowerShell script is a comprehensive Windows system optimization tool. It automates various tasks to improve system performance, clean up unnecessary files, and optimize disk usage. Below is a detailed list of its functionalities:
-
----
-
-  ## Features:
-    ### 1. Automatic ScheduleTask Automation
-    - Creates a **Task Scheduler** entry to run the script **daily at 12:01 AM**.  
-    - Ensures consistent system maintenance without user intervention.  
-
-    ### 2. Junk File Cleanup  
-    - Removes unnecessary files to free up disk space:  
-    - Clears the `%temp%` folder.  
-    - Deletes error reports (`WER` files).  
-    - Removes thumbnail caches.  
-    - Cleans Windows Update temporary files.  
-
-    ### 3. Disk Optimization  
-    - **For SSDs:**  
-      - Runs the **TRIM** command for better performance and longer lifespan.  
-    - **For HDDs:**  
-      - Defragments the disk to optimize file storage.  
-    - Compresses specific folders using **NTFS compression** to save disk space.  
-
-    ### 4. Service Management  
-    - Disables unnecessary Windows services to improve performance:  
-      - Diagnostic Tracking Service (`DiagTrack`).  
-      - Windows Search (`WSearch`).  
-      - Superfetch/Prefetch (`SysMain`).  
-    - Tweaks Xbox-related features by disabling **GameDVR** and other registry entries.  
-
-    ### 5. System Performance Enhancements  
-    - Optimizes network performance by modifying **TCP settings** (e.g., autotuning).  
-    - Adjusts Windows settings to reduce background processes.   
+The **Advanced System Care** script is a comprehensive Windows system optimization tool. It automates various tasks to enhance system performance, clean up unnecessary files, and optimize disk usage. Below is a detailed overview of its functionalities:
 
 ---
 
-## Instructions:
+## Features
 
-  ### 1. **Download the Script**
-     - Copy the script into a new `.ps1` file.  
-     - For example, save it as `optimize.ps1` on your desktop or a folder of your choice.
+### 1. **Automatic ScheduleTask Automation**
+   - Creates a **Task Scheduler** entry to run the script **daily at 12:01 AM**.  
+   - Ensures consistent system maintenance without requiring user intervention.
 
-  ### 2. **Set PowerShell Execution Policy** (if required)
-     If you haven't already allowed script execution, follow these steps:
+### 2. **Junk File Cleanup**
+   - Removes unnecessary files to free up disk space, including:
+     - Clears the `%temp%` folder.
+     - Deletes error reports (`WER` files).
+     - Removes thumbnail caches.
+     - Cleans Windows Update temporary files.
 
-     1. Open **PowerShell** as **Administrator**:
-        - Press `Win + X` and select **Windows PowerShell (Admin)**.
-   
-     2. To allow script execution, run the following command:
+### 3. **Disk Optimization**
+   - **For SSDs:**
+     - Runs the **TRIM** command to improve performance and extend lifespan.
+   - **For HDDs:**
+     - Defragments the disk to optimize file storage.
+     - Compresses specific folders using **NTFS compression** to save disk space.
+
+### 4. **Service Management**
+   - Disables unnecessary Windows services to improve performance, including:
+     - Diagnostic Tracking Service (`DiagTrack`).
+     - Windows Search (`WSearch`).
+     - Superfetch/Prefetch (`SysMain`).
+   - Disables **GameDVR** and tweaks other Xbox-related features in the registry.
+
+### 5. **System Performance Enhancements**
+   - Optimizes network performance by modifying **TCP settings** (e.g., autotuning).
+   - Adjusts Windows settings to reduce background processes and improve responsiveness.
+
+---
+
+## Instructions
+
+### 1. **Download the Script**
+   - Copy the script into a new `.ps1` file.
+   - For example, save it as `optimize.ps1` on your desktop or a folder of your choice.
+
+### 2. **Set PowerShell Execution Policy** (if required)
+   If script execution is disabled on your system, follow these steps:
+
+   1. **Open PowerShell as Administrator**:
+      - Press `Win + X` and select **Windows PowerShell (Admin)**.
+
+   2. **Allow Script Execution**:
+      - Run the following command to enable script execution:
         ```powershell
         Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
         ```
-        - This will allow running locally created scripts, but will require downloaded scripts to be signed by a trusted publisher.
+        This command allows locally created scripts to run but requires downloaded scripts to be signed by a trusted publisher.
 
-     3. When prompted, type `Y` to confirm the change.
+   3. **Confirm the Change**:
+      - When prompted, type `Y` to confirm the change.
 
-  ### 3. **Run the Script Manually**
-     To run the script manually:
+### 3. **Run the Script Manually**
+   To run the script manually, follow these steps:
 
-     1. **Navigate to the script's folder** in PowerShell:
-        - Use the `cd` (change directory) command to go to the folder where the script is saved.
+   1. **Navigate to the Script's Folder**:
+      - Use the `cd` (change directory) command to navigate to the folder where the script is saved.
         ```powershell
         cd "C:\Path\To\Script"
         ```
 
-     2. **Run the script** by typing the following command and pressing **Enter**:
+   2. **Execute the Script**:
+      - Run the script with the following command:
         ```powershell
-        .\SystemOptimization.ps1
+        .\optimize.ps1
         ```
-     - The script will execute, performing various tasks such as disk cleanup, service management, and system optimizations.
-   
-  ### 4. **Set Up the Script to Run Automatically (Optional)**
-     If you want the script to run automatically at a scheduled time (e.g., daily at 12:01 AM):
+      - The script will execute, performing disk cleanup, service management, and system optimizations.
 
-     1. Open **Task Scheduler**:
-        - Press `Win + R`, type `taskschd.msc`, and press **Enter**.
-   
-     2. In **Task Scheduler**, click on **Create Task** in the right-hand panel.
-   
-     3. In the **General** tab:
-        - Name your task (e.g., "System Optimization").
-        - Check **Run with highest privileges**.
+### 4. **Set Up the Script to Run Automatically (Optional)**
+   To schedule the script to run automatically (e.g., daily at 12:01 AM):
 
-     4. In the **Triggers** tab:
-        - Click **New**, and set the trigger to **Daily** at **12:01 AM** (or your desired time).
-   
-     5. In the **Actions** tab:
-        - Click **New**, and set the action to **Start a Program**.
-        - In the **Program/script** field, type `powershell.exe`.
-        - In the **Add arguments** field, enter:
-          ```powershell
-          -ExecutionPolicy Bypass -File "C:\Path\To\Script\SystemOptimization.ps1"
-          ```
-        - Replace `C:\Path\To\Script\SystemOptimization.ps1` with the actual path to your script.
+   1. **Open Task Scheduler**:
+      - Press `Win + R`, type `taskschd.msc`, and press **Enter**.
 
-     6. Click **OK** to save the task.
+   2. **Create a New Task**:
+      - In **Task Scheduler**, click **Create Task** in the right panel.
+
+   3. **General Tab**:
+      - Name the task (e.g., "System Optimization").
+      - Check **Run with highest privileges** to ensure the task has sufficient permissions.
+
+   4. **Triggers Tab**:
+      - Click **New** and set the trigger to **Daily** at **12:01 AM** (or your preferred time).
+
+   5. **Actions Tab**:
+      - Click **New**, then set the action to **Start a Program**.
+      - In the **Program/script** field, enter `powershell.exe`.
+      - In the **Add arguments** field, enter:
+        ```powershell
+        -ExecutionPolicy Bypass -File "C:\Path\To\Script\optimize.ps1"
+        ```
+        Replace `C:\Path\To\Script\optimize.ps1` with the actual path to your script.
+
+   6. **Save the Task**:
+      - Click **OK** to save and activate the task.
 
 ---
 
 ## Troubleshooting
 
 - **Script Execution Blocked**: If you encounter errors related to script execution, ensure that the execution policy is set to `RemoteSigned` or `Unrestricted`.
-- **Permissions Issue**: Make sure you are running PowerShell as Administrator when executing the script.
+- **Permissions Issues**: Ensure you are running PowerShell as Administrator to avoid permissions errors.
 
 ---
 
-## Who Should Use This Script?  
-This script is ideal for:  
-- **Tech-savvy users** who want to automate system maintenance.  
-- **System administrators** looking for a customizable optimization tool.  
-- **Gamers and power users** who want to maximize system performance.  
+## Who Should Use This Script?
+
+The **Advanced System Care** script is ideal for:
+- **Tech-savvy users** who wish to automate regular system maintenance tasks.
+- **System administrators** seeking a customizable optimization tool for multiple machines.
+- **Gamers and power users** looking to optimize their systems for performance and efficiency.
 
 ---
-
-
