@@ -65,7 +65,7 @@ The **Advanced System Care** script is a comprehensive Windows system optimizati
    1. **Navigate to the Script's Folder**:
       - Use the `cd` (change directory) command to navigate to the folder where the script is saved.
         ```powershell
-        cd "C:\Path\To\Script"
+        cd "C:\Users\Set_Your_Username\Desktop"
         ```
 
    2. **Execute the Script**:
